@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
 import { useState } from 'react';
+import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
 
 /**
  * ContactSection Component
@@ -64,10 +65,10 @@ export function ContactSection() {
   };
 
   const socialLinks = [
-    { label: 'Email', icon: '✉️', href: `mailto:${resumeData.email}` },
-    { label: 'LinkedIn', icon: '💼', href: resumeData.social.linkedin },
-    { label: 'GitHub', icon: '🐙', href: resumeData.social.github },
-    { label: 'Twitter', icon: '𝕏', href: resumeData.social.twitter },
+    { label: 'Email', icon: Mail, href: `mailto:${resumeData.email}` },
+    { label: 'LinkedIn', icon: Linkedin, href: resumeData.social.linkedin },
+    { label: 'GitHub', icon: Github, href: resumeData.social.github },
+    { label: 'Twitter', icon: Twitter, href: resumeData.social.twitter },
   ];
 
   return (
@@ -113,7 +114,9 @@ export function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="text-2xl">{link.icon}</span>
+                  <span className="p-2 rounded-md bg-primary/10 text-primary border border-primary/30">
+                    <link.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
                   <div>
                     <p className="font-semibold group-hover:text-primary transition-colors">
                       {link.label}

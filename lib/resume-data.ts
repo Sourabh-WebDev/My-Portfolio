@@ -6,12 +6,22 @@ export interface Experience {
   skills?: string[];
 }
 
+export interface Internship {
+  title: string;
+  type: string;
+  company: string;
+  location: string;
+  period: string;
+  description: string[];
+}
+
 export interface Project {
   title: string;
   description: string;
   technologies: string[];
   link?: string;
   image?: string;
+  nda?: boolean;
 }
 
 export interface Skill {
@@ -27,10 +37,10 @@ export const resumeData = {
   phone: "+91 8090300447",
   location: "South City, Lucknow",
   social: {
-    linkedin: "https://linkedin.com/in/sourabh-verma",
-    github: "https://github.com/sourabh",
+    linkedin: "https://www.linkedin.com/in/sourabh-vermaweb-dev/",
+    github: "https://github.com/Sourabh-WebDev",
     twitter: "https://twitter.com/sourabh",
-    portfolio: "https://portfolio-sourabh-webdev.vercel.app/",
+    portfolio: "https://sourabh-webdev-portfolio.vercel.app/",
   },
 
   about: {
@@ -132,34 +142,109 @@ export const resumeData = {
     },
   ] as Experience[],
 
+  internships: [
+    {
+      title: "React Js Developer",
+      type: "Internship",
+      company: "Predulive Edutech Foundation",
+      location: "Remote",
+      period: "Oct 2021 - Dec 2021",
+      description: [
+        "Created custom components, forms, and interfaces for user interactions in React.",
+        "Developed React applications using Redux state management and RESTful APIs.",
+        "Built reusable UI components that can be used across multiple projects with React.",
+      ],
+    },
+    {
+      title: "Backend Engineer",
+      type: "Internship",
+      company: "WASHCO",
+      location: "Remote",
+      period: "Jun 2018 - Sep 2018",
+      description: [
+        "Verified customer identity and collected appropriate documentation to comply with Know Your Customer regulations.",
+        "Assisted customers with account inquiries, including checking balances and resolving discrepancies.",
+      ],
+    },
+  ] as Internship[],
+
   projects: [
     {
-      title: "E-Commerce Platform",
+      title: "Appraiser Tool",
       description:
-        "Full-stack e-commerce solution with real-time inventory management and payment integration",
-      technologies: ["Next.js", "Stripe", "PostgreSQL", "Tailwind CSS"],
-      link: "#",
+        "A GIS-based property appraisal platform for managing and editing building and land records — similar to Bhu Lekh. Enables field officers to add, edit, and update cadastral data with map-integrated workflows.",
+      technologies: ["React.js", "GIS / Leaflet", "RESTful APIs", "Redux"],
+      nda: true,
     },
     {
-      title: "Task Management App",
+      title: "SidhaHisab",
       description:
-        "Collaborative task management tool with real-time updates using WebSockets",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-      link: "#",
+        "The all-in-one GST billing, inventory, and accounting software built for Bharat. Move from manual registers to a smart system in minutes — covering invoicing, stock management, and real-time financial reporting.",
+      technologies: ["React.js", "Node.js", "GST APIs", "Tailwind CSS"],
+      link: "https://www.sidhahisab.com/",
     },
     {
-      title: "Analytics Dashboard",
+      title: "CivicVerify",
       description:
-        "Data visualization dashboard with interactive charts and real-time data updates",
-      technologies: ["React", "D3.js", "Express", "PostgreSQL"],
-      link: "#",
+        "A secure civic identity verification system that enables authorities to verify citizenship, add new members, update member records, and manage Head-of-Family (HoF) details within a structured digital registry.",
+      technologies: ["React.js", "TypeScript", "RESTful APIs", "Redux"],
+      nda: true,
     },
     {
-      title: "AI Chat Application",
+      title: "Job Portal",
       description:
-        "Intelligent chatbot with NLP capabilities and conversation history management",
-      technologies: ["Next.js", "OpenAI API", "TypeScript", "Supabase"],
-      link: "#",
+        "A full-featured job portal connecting employers and job seekers. Supports job listings, candidate applications, resume uploads, recruiter dashboards, and real-time application status tracking.",
+      technologies: ["React.js", "Node.js", "MongoDB", "RESTful APIs"],
+      nda: true,
+    },
+    {
+      title: "HR Portal",
+      description:
+        "An internal HR management platform covering employee onboarding, leave management, department structure, performance reviews, and document handling — designed to streamline HR operations.",
+      technologies: ["React.js", "Redux", "Node.js", "Tailwind CSS"],
+      nda: true,
+    },
+    {
+      title: "Pay Roll",
+      description:
+        "An automated payroll processing system handling salary computation, tax deductions, payslip generation, and compliance reporting. Supports multi-department payroll with approval workflows.",
+      technologies: ["React.js", "TypeScript", "RESTful APIs", "Ant Design"],
+      nda: true,
+    },
+    {
+      title: "Employee Portal",
+      description:
+        "A self-service employee portal where staff can view payslips, apply for leave, update personal details, access company announcements, and track attendance — reducing HR workload significantly.",
+      technologies: ["React.js", "Redux", "Material UI", "RESTful APIs"],
+      nda: true,
+    },
+    {
+      title: "Coaching & Library Management",
+      description:
+        "A comprehensive management system for coaching institutes and libraries — handling student enrollment, batch scheduling, fee collection, book inventory, and issuance tracking.",
+      technologies: ["React.js", "Node.js", "MongoDB", "Bootstrap"],
+      link: "http://smseducationlko.com/",
+    },
+    {
+      title: "Hotelio — Hotel Management",
+      description:
+        "A modern hotel management platform for room booking, front-desk operations, housekeeping tracking, billing, and guest management — streamlining end-to-end hotel workflows.",
+      technologies: ["React.js", "Next.js", "Tailwind CSS", "RESTful APIs"],
+      link: "https://hoteliorooms.com/",
+    },
+    {
+      title: "Trickle Solutions — Landing Page",
+      description:
+        "A professional company landing page for Trickle Solutions LLP showcasing services, team, portfolio, and contact information with smooth animations and responsive design.",
+      technologies: ["React.js", "Tailwind CSS", "Framer Motion"],
+      link: "https://trickle-solutions-website.vercel.app/",
+    },
+    {
+      title: "Sociomee",
+      description:
+        "A comprehensive social media platform blending the best features of Facebook, Instagram, and LinkedIn — supporting posts, stories, connections, groups, professional networking, and real-time messaging in one unified experience.",
+      technologies: ["React.js", "Redux", "Node.js", "Socket.io", "RESTful APIs"],
+      nda: true,
     },
   ] as Project[],
 

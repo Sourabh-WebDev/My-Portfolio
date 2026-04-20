@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ShieldAlert, ExternalLink } from 'lucide-react';
 import { resumeData } from '@/lib/resume-data';
 
 /**
@@ -85,33 +86,44 @@ export function ProjectsSection() {
           className="grid md:grid-cols-2 gap-8"
         >
           {resumeData.projects.map((project, index) => (
-            <motion.a
+            <motion.div
               key={project.title}
-              href={project.link || '#'}
               variants={index % 2 === 0 ? cardVariantsLeft : cardVariantsRight}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               whileHover="hover"
-              className="glass-effect p-8 rounded-xl group cursor-pointer"
+              className="glass-effect p-8 rounded-xl group flex flex-col"
             >
-              {/* Project Image Placeholder */}
-              <div className="mb-6 h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-colors">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">💻</div>
-                  <p className="text-sm text-muted-foreground">Project Demo</p>
-                </div>
+              {/* Project banner */}
+              <div className="mb-6 h-40 bg-linear-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-colors relative overflow-hidden">
+                {project.nda ? (
+                  <div className="flex flex-col items-center gap-2 text-center">
+                    <ShieldAlert className="h-10 w-10 text-primary/70" />
+                    <p className="text-xs text-muted-foreground px-4">Under NDA — details restricted</p>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <div className="text-5xl mb-1">💻</div>
+                    <p className="text-xs text-muted-foreground">Live Project</p>
+                  </div>
+                )}
+                {project.nda && (
+                  <span className="absolute top-3 right-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/40">
+                    <ShieldAlert className="h-3 w-3" /> NDA
+                  </span>
+                )}
               </div>
 
               <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
 
-              <p className="text-muted-foreground mb-6 line-clamp-3">
+              <p className="text-muted-foreground mb-6 line-clamp-3 flex-1">
                 {project.description}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
@@ -122,15 +134,25 @@ export function ProjectsSection() {
                 ))}
               </div>
 
-              <motion.div
-                className="mt-6 flex items-center gap-2 text-primary font-semibold"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <span>View Project</span>
-                <span>→</span>
-              </motion.div>
-            </motion.a>
+              {project.link ? (
+                <motion.a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-primary font-semibold w-fit"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  <span>View Live</span>
+                </motion.a>
+              ) : (
+                <div className="flex items-center gap-2 text-yellow-400/70 text-sm font-medium">
+                  <ShieldAlert className="h-4 w-4" />
+                  <span>Confidential — Not publicly available</span>
+                </div>
+              )}
+            </motion.div>
           ))}
         </motion.div>
       </div>
