@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
 import { useState } from 'react';
-import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Linkedin, Github, Phone } from 'lucide-react';
 
 /**
  * ContactSection Component
@@ -68,7 +68,7 @@ export function ContactSection() {
     { label: 'Email', icon: Mail, href: `mailto:${resumeData.email}` },
     { label: 'LinkedIn', icon: Linkedin, href: resumeData.social.linkedin },
     { label: 'GitHub', icon: Github, href: resumeData.social.github },
-    { label: 'Twitter', icon: Twitter, href: resumeData.social.twitter },
+    { label: 'Phone', icon: Phone, href: `tel:${resumeData.phone.replace(/\s/g, '')}` },
   ];
 
   return (
@@ -122,7 +122,7 @@ export function ContactSection() {
                       {link.label}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {link.label === 'Email' ? resumeData.email : `Visit my ${link.label}`}
+                      {link.label === 'Email' ? resumeData.email : link.label === 'Phone' ? resumeData.phone : `Visit my ${link.label}`}
                     </p>
                   </div>
                 </motion.a>

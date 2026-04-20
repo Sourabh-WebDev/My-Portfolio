@@ -16,10 +16,7 @@ export function Footer() {
           className="text-center"
         >
           <p className="text-muted-foreground mb-4">
-            Built with <span className="text-primary">React</span>,{' '}
-            <span className="text-primary">Next.js</span>,{' '}
-            <span className="text-primary">Three.js</span>, and{' '}
-            <span className="text-primary">Framer Motion</span>
+            Built with ❤️ by <span className="text-primary">Sourabh Verma</span>
           </p>
           <p className="text-muted-foreground">
             &copy; {currentYear} Sourabh Verma. All rights reserved.
