@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
+import { ParallaxOrbs, SectionAtmosphere } from '../ParallaxOrbs';
 
 /**
  * ExperienceSection Component
@@ -44,7 +45,13 @@ const itemVariants = {
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 px-6">
+    <section id="experience" className="py-20 px-6 relative overflow-hidden">
+      <ParallaxOrbs orbs={[
+        { size: 460, top: '5%', left: '88%', color: '#a78bfa', speed: 0.05, blur: 140, opacity: 0.06 },
+        { size: 260, top: '85%', left: '2%', color: '#50d4ff', speed: 0.20, blur: 100, opacity: 0.06 },
+        { size: 175, top: '50%', left: '50%', color: '#f472b6', speed: 0.52, blur: 80, opacity: 0.04 },
+      ]} />
+      <SectionAtmosphere number="04" flip />
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +77,7 @@ export function ExperienceSection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="glass-effect p-8 rounded-xl relative pl-8 border-l-2 border-primary"
+              className="glass-effect p-5 sm:p-8 rounded-xl relative pl-6 sm:pl-8 border-l-2 border-primary"
               whileHover={{ x: 10 }}
             >
               <div className="absolute -left-4 top-8 w-6 h-6 bg-primary rounded-full border-4 border-background" />

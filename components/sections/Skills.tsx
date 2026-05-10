@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
+import { TechIcon } from '../Illustrations';
+import { ParallaxOrbs, ParallaxLayer, SectionAtmosphere } from '../ParallaxOrbs';
 
 /**
  * SkillsSection Component
@@ -47,7 +49,13 @@ const skillCardVariants = {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-20 px-6 bg-card/30">
+    <section id="skills" className="py-20 px-6 bg-card/30 relative overflow-hidden">
+      <ParallaxOrbs orbs={[
+        { size: 480, top: '-5%', left: '85%', color: '#50d4ff', speed: 0.05, blur: 150, opacity: 0.06 },
+        { size: 280, top: '80%', left: '-5%', color: '#a78bfa', speed: 0.22, blur: 100, opacity: 0.06 },
+        { size: 190, top: '40%', left: '45%', color: '#f472b6', speed: 0.55, blur: 85, opacity: 0.038 },
+      ]} />
+      <SectionAtmosphere number="03" />
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,11 +91,11 @@ export function SkillsSection() {
                 {skillCategory.items.map((skill) => (
                   <motion.li
                     key={skill}
-                    className="text-muted-foreground flex items-center gap-2"
+                    className="text-muted-foreground flex items-center gap-2.5"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                    {skill}
+                    <TechIcon skill={skill} size={28} />
+                    <span className="text-sm">{skill}</span>
                   </motion.li>
                 ))}
               </ul>

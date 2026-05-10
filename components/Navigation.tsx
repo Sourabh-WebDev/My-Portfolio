@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
-const sections = ['home', 'about', 'skills', 'experience', 'internships', 'projects', 'contact'];
+const sections = ['home', 'about', 'skills', 'experience', 'internships', 'projects', 'certifications', 'contact'];
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -48,12 +49,22 @@ export function Navigation() {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <motion.div
-          className="text-2xl font-bold gradient-text"
+        <motion.button
+          onClick={() => handleNavigate('home')}
+          className="flex items-center gap-2.5 group"
           whileHover={{ scale: 1.05 }}
+          aria-label="Go to top"
         >
-          Sourabh
-        </motion.div>
+          <Image
+            src="/favicon_io/android-chrome-192x192.png"
+            alt="SV logo"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            priority
+          />
+          <span className="text-xl font-bold gradient-text">Sourabh</span>
+        </motion.button>
 
         <ul className="hidden md:flex gap-8">
           {sections.map((section) => (
@@ -61,8 +72,8 @@ export function Navigation() {
               <button
                 onClick={() => handleNavigate(section)}
                 className={`capitalize transition-colors ${activeSection === section
-                    ? 'text-primary font-semibold'
-                    : 'text-muted-foreground hover:text-foreground'
+                  ? 'text-primary font-semibold'
+                  : 'text-muted-foreground hover:text-foreground'
                   }`}
               >
                 {section}
@@ -103,8 +114,8 @@ export function Navigation() {
                 <button
                   onClick={() => handleNavigate(section)}
                   className={`w-full text-left px-3 py-2 rounded-md capitalize transition-colors ${activeSection === section
-                      ? 'bg-primary/15 text-primary font-semibold'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+                    ? 'bg-primary/15 text-primary font-semibold'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                     }`}
                 >
                   {section}

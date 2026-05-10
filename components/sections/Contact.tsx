@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
 import { useState } from 'react';
+import { ParallaxOrbs, SectionAtmosphere } from '../ParallaxOrbs';
 import { Mail, Linkedin, Github, Phone } from 'lucide-react';
 
 /**
@@ -72,7 +73,13 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-6">
+    <section id="contact" className="py-20 px-6 relative overflow-hidden">
+      <ParallaxOrbs orbs={[
+        { size: 520, top: '5%', left: '-6%', color: '#a78bfa', speed: 0.05, blur: 145, opacity: 0.065 },
+        { size: 300, top: '80%', left: '88%', color: '#50d4ff', speed: 0.20, blur: 105, opacity: 0.06 },
+        { size: 180, top: '48%', left: '50%', color: '#f472b6', speed: 0.53, blur: 88, opacity: 0.04 },
+      ]} />
+      <SectionAtmosphere number="08" flip />
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -134,7 +141,7 @@ export function ContactSection() {
           <motion.form
             variants={itemVariants}
             onSubmit={handleSubmit}
-            className="glass-effect p-8 rounded-xl space-y-6"
+            className="glass-effect p-5 sm:p-8 rounded-xl space-y-6"
           >
             <div>
               <label htmlFor="name" className="block text-sm font-semibold mb-2">

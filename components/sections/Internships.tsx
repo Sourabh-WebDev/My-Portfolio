@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { resumeData } from '@/lib/resume-data';
+import { ParallaxOrbs, SectionAtmosphere } from '../ParallaxOrbs';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -25,7 +26,13 @@ const itemVariants = {
 
 export function InternshipsSection() {
     return (
-        <section id="internships" className="py-20 px-6">
+        <section id="internships" className="py-20 px-6 relative overflow-hidden">
+            <ParallaxOrbs orbs={[
+                { size: 460, top: '8%', left: '90%', color: '#50d4ff', speed: 0.05, blur: 145, opacity: 0.06 },
+                { size: 270, top: '78%', left: '-4%', color: '#a78bfa', speed: 0.22, blur: 100, opacity: 0.06 },
+                { size: 175, top: '42%', left: '46%', color: '#f472b6', speed: 0.56, blur: 82, opacity: 0.038 },
+            ]} />
+            <SectionAtmosphere number="05" />
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

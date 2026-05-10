@@ -24,6 +24,15 @@ export interface Project {
   nda?: boolean;
 }
 
+export interface Certification {
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  link?: string;
+  category: 'certification' | 'achievement' | 'award';
+}
+
 export interface Skill {
   category: string;
   items: string[];
@@ -268,4 +277,61 @@ export const resumeData = {
       year: "2015 - 2018",
     },
   ],
+
+  certifications: [
+    {
+      title: "React – The Complete Guide (incl. Redux)",
+      issuer: "Udemy / Academind",
+      date: "2023",
+      credentialId: "UC-react-complete",
+      link: "https://www.udemy.com/",
+      category: "certification",
+    },
+    {
+      title: "Next.js & React – The Complete Guide",
+      issuer: "Udemy / Academind",
+      date: "2023",
+      credentialId: "UC-nextjs-complete",
+      link: "https://www.udemy.com/",
+      category: "certification",
+    },
+    {
+      title: "TypeScript – The Complete Developer's Guide",
+      issuer: "Udemy / Stephen Grider",
+      date: "2022",
+      credentialId: "UC-typescript-guide",
+      link: "https://www.udemy.com/",
+      category: "certification",
+    },
+    {
+      title: "MERN Stack Development",
+      issuer: "Digipodium, Lucknow",
+      date: "2022",
+      category: "certification",
+    },
+    {
+      title: "Master of Business Administration – IT",
+      issuer: "Integral University, Lucknow",
+      date: "2022",
+      category: "achievement",
+    },
+    {
+      title: "4+ Years of Professional Experience",
+      issuer: "Industry Recognition",
+      date: "2020 – Present",
+      category: "achievement",
+    },
+    {
+      title: "20+ Projects Delivered",
+      issuer: "Client Milestones",
+      date: "2020 – Present",
+      category: "achievement",
+    },
+    {
+      title: "Responsive Design Excellence",
+      issuer: "Internal Team Recognition – Apexpath OPC",
+      date: "2024",
+      category: "award",
+    },
+  ] as Certification[],
 };
