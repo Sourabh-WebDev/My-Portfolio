@@ -8,18 +8,18 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Sourabh Verma | Full Stack Developer',
-  description: 'Creative full-stack developer building immersive digital experiences with 3D web technologies, React, and modern design.',
+  description: 'Full Stack Developer with 5+ years of experience building modern, scalable web applications with React.js, Next.js, Node.js, and TypeScript.',
   generator: 'v0.app',
   metadataBase: new URL('https://sourabh.dev'),
   openGraph: {
     title: 'Sourabh Verma | Full Stack Developer',
-    description: 'Creative full-stack developer with expertise in React, Next.js, and 3D web technologies',
+    description: 'Full Stack Developer with 5+ years of experience building modern, scalable web applications with React.js, Next.js, Node.js, and TypeScript.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sourabh Verma | Full Stack Developer',
-    description: 'Creative full-stack developer with expertise in React, Next.js, and 3D web technologies',
+    description: 'Full Stack Developer with 5+ years of experience building modern, scalable web applications with React.js, Next.js, Node.js, and TypeScript.',
   },
   icons: {
     icon: [

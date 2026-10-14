@@ -1,131 +1,168 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { Icon3D } from './Icon3D';
+import { techIcons } from './Illustrations';
 
 /**
- * Eremia-style page loader.
+ * Stacked-slides page loader (inspired by structureengineering.com.au).
  *
  * Phases:
- *  1. counting  – giant counter animates 0 → 100 (~1.8 s) with progress bar
- *  2. splitting – two curtain halves slide off screen (top ↑, bottom ↓)
- *  3. done      – component unmounts, site becomes interactive
+ *  1. intro     – a small window (the viewport scaled down) sits over a giant monogram
+ *  2. playing   – skill slides drop out of the window one after another
+ *  3. expanding – the final name slide grows to fill the screen
+ *  4. done      – overlay fades out and unmounts, scrolling is restored
  */
+
+const SLIDES = [
+    { skill: 'React.js', label: 'React.js' },
+    { skill: 'Next.js', label: 'Next.js' },
+    { skill: 'TypeScript', label: 'TypeScript' },
+    { skill: 'Node.js', label: 'Node.js' },
+    { skill: 'Express.js', label: 'Express.js' },
+    { skill: 'MongoDB', label: 'MongoDB' },
+    { skill: 'Tailwind CSS', label: 'Tailwind CSS' },
+    { skill: 'Artificial Intelligence (AI)', label: 'AI' },
+];
+
+const EASE = [0.76, 0, 0.24, 1] as const;
+const START_DELAY = 0.45; // s – monogram on screen before the first drop
+const STEP = 0.26; // s – gap between slide drops
+const DROP = 0.42; // s – duration of a single drop
+const HOLD = 0.3; // s – pause on the name slide before expanding
+const EXPAND = 0.7; // s – window → full screen
+
 export function PageLoader() {
-    const [count, setCount] = useState(0);
-    const [phase, setPhase] = useState<'counting' | 'splitting' | 'done'>('counting');
+    const reduceMotion = useReducedMotion();
+    const [phase, setPhase] = useState<'intro' | 'playing' | 'expanding' | 'done'>('intro');
+    const [current, setCurrent] = useState(0);
 
     useEffect(() => {
-        const duration = 1800;
-        const start = performance.now();
+        if (reduceMotion) {
+            setPhase('done');
+            return;
+        }
 
-        const tick = (now: number) => {
-            const t = Math.min((now - start) / duration, 1);
-            // ease-out quad
-            const eased = 1 - (1 - t) * (1 - t);
-            setCount(Math.floor(eased * 100));
+        const root = document.documentElement;
+        const prevOverflow = root.style.overflow;
+        root.style.overflow = 'hidden';
 
-            if (t < 1) {
-                requestAnimationFrame(tick);
-            } else {
-                setCount(100);
-                setTimeout(() => setPhase('splitting'), 280);
-                setTimeout(() => setPhase('done'), 1100);
-            }
+        const expandAt = (START_DELAY + (SLIDES.length - 1) * STEP + DROP + HOLD) * 1000;
+        const timers = [
+            setTimeout(() => setPhase('playing'), 50),
+            setTimeout(() => setPhase('expanding'), expandAt),
+            setTimeout(() => {
+                setPhase('done');
+                root.style.overflow = prevOverflow;
+            }, expandAt + EXPAND * 1000 + 150),
+        ];
+
+        return () => {
+            timers.forEach(clearTimeout);
+            root.style.overflow = prevOverflow;
         };
+    }, [reduceMotion]);
 
-        requestAnimationFrame(tick);
-    }, []);
+    const playing = phase === 'playing' || phase === 'expanding';
+    const counter = Math.min(current + 1, SLIDES.length);
 
     return (
         <AnimatePresence>
             {phase !== 'done' && (
-                <>
-                    {/* ── Top curtain half ── */}
+                <motion.div
+                    key="loader"
+                    className="fixed inset-0 z-200 bg-background overflow-hidden select-none"
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    aria-hidden="true"
+                >
+                    {/* ── Giant monogram behind the window ── */}
                     <motion.div
-                        key="loader-top"
-                        className="fixed inset-x-0 top-0 z-[200] bg-background"
-                        style={{ height: '50vh' }}
-                        animate={phase === 'splitting' ? { y: '-100%' } : { y: 0 }}
-                        transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1], delay: 0.04 }}
+                        className="absolute inset-0 flex items-center justify-center"
+                        initial={{ opacity: 0, scale: 1.08 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
                     >
-                        {/* Seam accent line */}
-                        <span className="absolute bottom-0 inset-x-0 h-px bg-linear-to-r from-transparent via-primary to-transparent opacity-50" />
+                        <span
+                            className="font-black leading-none tracking-[-0.06em] text-transparent"
+                            style={{
+                                fontSize: 'min(72vh, 62vw)',
+                                WebkitTextStroke: '2px rgba(80, 212, 255, 0.28)',
+                            }}
+                        >
+                            SV
+                        </span>
                     </motion.div>
 
-                    {/* ── Bottom curtain half ── */}
-                    <motion.div
-                        key="loader-bottom"
-                        className="fixed inset-x-0 bottom-0 z-[200] bg-background"
-                        style={{ height: '50vh' }}
-                        animate={phase === 'splitting' ? { y: '100%' } : { y: 0 }}
-                        transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1], delay: 0.04 }}
+                    {/* ── Window: the full viewport scaled down, grows to fill the screen ── */}
+                    <div
+                        className={`absolute inset-0 overflow-hidden transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                            phase === 'expanding' ? 'scale-100' : 'scale-[0.5] md:scale-[0.28]'
+                        }`}
+                        style={{ transitionDuration: `${EXPAND * 1000}ms` }}
                     >
-                        {/* Seam accent line */}
-                        <span className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-50" />
-
-                        {/* Progress bar */}
-                        <div className="absolute bottom-8 left-10 right-10">
-                            <div className="h-px bg-border/30 rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-linear-to-r from-primary to-accent rounded-full transition-all duration-75"
-                                    style={{ width: `${count}%` }}
-                                />
-                            </div>
-                            <div className="flex justify-between mt-2">
-                                <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/50">
-                                    Loading
-                                </span>
-                                <span className="text-[10px] font-mono text-muted-foreground/50">{count}%</span>
-                            </div>
+                        {/* Final slide – revealed after every skill has dropped */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background text-center px-6">
+                            <p className="text-sm md:text-base font-semibold tracking-[0.4em] uppercase text-primary mb-6">
+                                Portfolio
+                            </p>
+                            <p className="font-black leading-[0.9] tracking-[-0.04em]" style={{ fontSize: 'clamp(3.5rem, 13vw, 14rem)' }}>
+                                <span className="gradient-text">Sourabh</span>
+                                <br />
+                                <span className="text-foreground">Verma</span>
+                            </p>
+                            <p className="mt-8 text-base md:text-xl tracking-[0.3em] uppercase text-muted-foreground">
+                                Full Stack Developer
+                            </p>
                         </div>
-                    </motion.div>
 
-                    {/* ── Centre overlay — sits above both halves ── */}
+                        {/* Skill slides – first one on top */}
+                        {SLIDES.map(({ skill, label }, i) => {
+                            const cfg = techIcons[skill];
+                            return (
+                                <motion.div
+                                    key={skill}
+                                    className="absolute inset-0 flex flex-col items-center justify-center gap-10"
+                                    style={{
+                                        zIndex: SLIDES.length - i,
+                                        background: `radial-gradient(110% 85% at 50% 40%, ${cfg.color} 0%, color-mix(in oklab, ${cfg.color} 30%, #050505) 55%, #050505 100%)`,
+                                    }}
+                                    initial={{ y: 0 }}
+                                    animate={playing ? { y: '100%' } : { y: 0 }}
+                                    transition={{ duration: DROP, ease: EASE, delay: START_DELAY + i * STEP }}
+                                    onAnimationComplete={() => playing && setCurrent(i + 1)}
+                                >
+                                    <Icon3D
+                                        icon={cfg.icon}
+                                        color={cfg.color}
+                                        glyphColor={cfg.glyph}
+                                        size={260}
+                                        interactive={false}
+                                    />
+                                    <p
+                                        className="font-black text-white tracking-[-0.03em] leading-none drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                                        style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
+                                    >
+                                        {label}
+                                    </p>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* ── Corner labels ── */}
                     <motion.div
-                        key="loader-center"
-                        className="fixed inset-0 z-[201] flex items-center justify-center pointer-events-none"
-                        animate={
-                            phase === 'splitting'
-                                ? { opacity: 0, scale: 0.9 }
-                                : { opacity: 1, scale: 1 }
-                        }
+                        className="absolute inset-x-6 md:inset-x-10 bottom-6 md:bottom-8 flex justify-between items-end text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground/70"
+                        animate={{ opacity: phase === 'expanding' ? 0 : 1 }}
                         transition={{ duration: 0.25 }}
                     >
-                        <div className="text-center select-none">
-                            {/* Label */}
-                            <motion.p
-                                className="text-[10px] font-semibold tracking-[0.35em] uppercase text-primary mb-5"
-                                initial={{ opacity: 0, y: 6 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.45, delay: 0.15 }}
-                            >
-                                Sourabh Verma
-                            </motion.p>
-
-                            {/* Giant counter — scales with viewport */}
-                            <p
-                                className="font-black leading-none text-foreground"
-                                style={{
-                                    fontSize: 'clamp(5rem, 18vw, 13rem)',
-                                    letterSpacing: '-0.04em',
-                                }}
-                            >
-                                {String(count).padStart(2, '0')}
-                            </p>
-
-                            {/* Sub-label */}
-                            <motion.p
-                                className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground/40 mt-4"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.45, delay: 0.35 }}
-                            >
-                                Front-End Developer
-                            </motion.p>
-                        </div>
+                        <span>Sourabh Verma</span>
+                        <span className="font-mono tracking-[0.15em]">
+                            {String(counter).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+                        </span>
                     </motion.div>
-                </>
+                </motion.div>
             )}
         </AnimatePresence>
     );

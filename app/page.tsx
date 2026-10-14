@@ -1,4 +1,5 @@
 import { PageLoader } from '@/components/PageLoader';
+import { CursorEffect } from '@/components/CursorEffect';
 import { Navigation } from '@/components/Navigation';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { HeroSection } from '@/components/sections/Hero';
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <main className="bg-background text-foreground">
       <PageLoader />
+      <CursorEffect />
       <ScrollProgress />
       <Navigation />
       <HeroSection />

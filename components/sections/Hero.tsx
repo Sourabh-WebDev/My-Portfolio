@@ -26,6 +26,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
+      data-cursor="Scroll to explore"
       className="relative min-h-screen flex items-center overflow-hidden pt-20"
     >
       {/* 3D Background */}
@@ -54,7 +55,7 @@ export function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Full-Stack · React · Next.js
+              Full-Stack · React · Node.js · AI
             </motion.p>
 
             <motion.h1
@@ -74,8 +75,8 @@ export function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              Building immersive digital experiences with cutting-edge technologies.
-              Full-stack developer passionate about 3D web, performance, and design.
+              Full Stack Developer with 5+ years of experience building modern, scalable,
+              and high-performance web applications with React.js, Next.js, Node.js, and TypeScript.
             </motion.p>
 
             <motion.div
@@ -110,7 +111,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               {[
-                { value: '4+', label: 'Years Exp.' },
+                { value: '5+', label: 'Years Exp.' },
                 { value: '20+', label: 'Projects' },
                 { value: '10+', label: 'Technologies' },
               ].map((stat) => (

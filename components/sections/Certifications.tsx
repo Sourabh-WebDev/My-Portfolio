@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Award, BadgeCheck, Trophy, ExternalLink } from 'lucide-react';
 import { resumeData } from '@/lib/resume-data';
+import { Icon3D } from '../Icon3D';
 import { ParallaxOrbs, ParallaxLayer, SectionAtmosphere } from '../ParallaxOrbs';
 
 const containerVariants = {
@@ -26,6 +27,7 @@ const categoryConfig = {
     certification: {
         icon: BadgeCheck,
         color: '#50d4ff',
+        face: '#0ea5e9',
         bg: 'bg-primary/10',
         border: 'border-primary/30',
         iconColor: 'text-primary',
@@ -34,6 +36,7 @@ const categoryConfig = {
     achievement: {
         icon: Trophy,
         color: '#a78bfa',
+        face: '#8b5cf6',
         bg: 'bg-accent/10',
         border: 'border-accent/30',
         iconColor: 'text-accent',
@@ -42,6 +45,7 @@ const categoryConfig = {
     award: {
         icon: Award,
         color: '#f472b6',
+        face: '#ec4899',
         bg: 'bg-[#f472b6]/10',
         border: 'border-[#f472b6]/30',
         iconColor: 'text-[#f472b6]',
@@ -119,7 +123,7 @@ export function CertificationsSection() {
                     className="mb-10"
                 >
                     <h3 className="text-xl font-semibold text-muted-foreground mb-6 flex items-center gap-2">
-                        <BadgeCheck className="h-5 w-5 text-primary" />
+                        <Icon3D icon={BadgeCheck} color={categoryConfig.certification.face} size={30} interactive={false} />
                         Certifications
                     </h3>
                     <motion.div
@@ -131,7 +135,6 @@ export function CertificationsSection() {
                     >
                         {certifications.map((cert) => {
                             const cfg = categoryConfig[cert.category];
-                            const Icon = cfg.icon;
                             return (
                                 <motion.div
                                     key={cert.title}
@@ -139,9 +142,7 @@ export function CertificationsSection() {
                                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
                                     className={`glass-effect p-6 rounded-xl border ${cfg.border} group flex gap-4 items-start`}
                                 >
-                                    <div className={`shrink-0 w-11 h-11 rounded-lg ${cfg.bg} border ${cfg.border} flex items-center justify-center`}>
-                                        <Icon className={`h-5 w-5 ${cfg.iconColor}`} />
-                                    </div>
+                                    <Icon3D icon={cfg.icon} color={cfg.face} size={46} />
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-start justify-between gap-2">
                                             <h4 className="font-semibold text-base leading-snug group-hover:text-primary transition-colors">
@@ -159,12 +160,12 @@ export function CertificationsSection() {
                                                 </a>
                                             )}
                                         </div>
-                                        <p className="text-sm text-muted-foreground mt-1">{cert.issuer}</p>
+                                        {cert.issuer && <p className="text-sm text-muted-foreground mt-1">{cert.issuer}</p>}
                                         <div className="flex items-center gap-3 mt-2 flex-wrap">
                                             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${cfg.bg} ${cfg.iconColor} border ${cfg.border}`}>
                                                 {cfg.label}
                                             </span>
-                                            <span className="text-xs text-muted-foreground">{cert.date}</span>
+                                            {cert.date && <span className="text-xs text-muted-foreground">{cert.date}</span>}
                                             {cert.credentialId && (
                                                 <span className="text-xs text-muted-foreground/60 font-mono truncate">
                                                     ID: {cert.credentialId}
@@ -186,7 +187,7 @@ export function CertificationsSection() {
                     viewport={{ once: true }}
                 >
                     <h3 className="text-xl font-semibold text-muted-foreground mb-6 flex items-center gap-2">
-                        <Trophy className="h-5 w-5 text-accent" />
+                        <Icon3D icon={Trophy} color={categoryConfig.achievement.face} size={30} interactive={false} />
                         Achievements &amp; Awards
                     </h3>
                     <motion.div
@@ -198,7 +199,6 @@ export function CertificationsSection() {
                     >
                         {achievements.map((cert) => {
                             const cfg = categoryConfig[cert.category];
-                            const Icon = cfg.icon;
                             return (
                                 <motion.div
                                     key={cert.title}
@@ -206,20 +206,15 @@ export function CertificationsSection() {
                                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
                                     className={`glass-effect p-6 rounded-xl border ${cfg.border} group text-center flex flex-col items-center gap-3`}
                                 >
-                                    <div
-                                        className={`w-14 h-14 rounded-full ${cfg.bg} border ${cfg.border} flex items-center justify-center`}
-                                        style={{ boxShadow: `0 0 24px ${cfg.color}30` }}
-                                    >
-                                        <Icon className={`h-7 w-7 ${cfg.iconColor}`} />
-                                    </div>
+                                    <Icon3D icon={cfg.icon} color={cfg.face} size={60} shape="circle" />
                                     <div>
                                         <h4 className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors">
                                             {cert.title}
                                         </h4>
-                                        <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>
+                                        {cert.issuer && <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>}
                                         <span className="inline-block text-xs font-medium mt-2 px-2 py-0.5 rounded-full border"
                                             style={{ color: cfg.color, borderColor: `${cfg.color}40`, background: `${cfg.color}10` }}>
-                                            {cert.date}
+                                            {cert.date ?? cfg.label}
                                         </span>
                                     </div>
                                 </motion.div>

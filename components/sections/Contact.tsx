@@ -5,6 +5,8 @@ import { resumeData } from '@/lib/resume-data';
 import { useState } from 'react';
 import { ParallaxOrbs, SectionAtmosphere } from '../ParallaxOrbs';
 import { Mail, Linkedin, Github, Phone } from 'lucide-react';
+import { Icon3D } from '../Icon3D';
+import { FallingStack } from '../FallingStack';
 
 /**
  * ContactSection Component
@@ -66,21 +68,22 @@ export function ContactSection() {
   };
 
   const socialLinks = [
-    { label: 'Email', icon: Mail, href: `mailto:${resumeData.email}` },
-    { label: 'LinkedIn', icon: Linkedin, href: resumeData.social.linkedin },
-    { label: 'GitHub', icon: Github, href: resumeData.social.github },
-    { label: 'Phone', icon: Phone, href: `tel:${resumeData.phone.replace(/\s/g, '')}` },
+    { label: 'Email', icon: Mail, color: '#0ea5e9', href: `mailto:${resumeData.email}` },
+    { label: 'LinkedIn', icon: Linkedin, color: '#0a66c2', href: resumeData.social.linkedin },
+    { label: 'GitHub', icon: Github, color: '#8b5cf6', href: resumeData.social.github },
+    { label: 'Phone', icon: Phone, color: '#10b981', href: `tel:${resumeData.phone.replace(/\s/g, '')}` },
   ];
 
   return (
-    <section id="contact" className="py-20 px-6 relative overflow-hidden">
+    <section id="contact" data-cursor="Stir the stack" className="py-20 px-6 relative overflow-hidden">
       <ParallaxOrbs orbs={[
         { size: 520, top: '5%', left: '-6%', color: '#a78bfa', speed: 0.05, blur: 145, opacity: 0.065 },
         { size: 300, top: '80%', left: '88%', color: '#50d4ff', speed: 0.20, blur: 105, opacity: 0.06 },
         { size: 180, top: '48%', left: '50%', color: '#f472b6', speed: 0.53, blur: 88, opacity: 0.04 },
       ]} />
       <SectionAtmosphere number="08" flip />
-      <div className="max-w-4xl mx-auto">
+      <FallingStack />
+      <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +106,7 @@ export function ContactSection() {
         >
           {/* Contact Info */}
           <motion.div variants={itemVariants} className="space-y-8">
-            <div>
+            <div className="glass-effect p-5 rounded-xl">
               <h3 className="text-2xl font-bold mb-2">Let&apos;s Connect</h3>
               <p className="text-muted-foreground text-lg">
                 I&apos;m always interested in hearing about new projects and opportunities.
@@ -121,9 +124,7 @@ export function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="p-2 rounded-md bg-primary/10 text-primary border border-primary/30">
-                    <link.icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
+                  <Icon3D icon={link.icon} color={link.color} size={42} />
                   <div>
                     <p className="font-semibold group-hover:text-primary transition-colors">
                       {link.label}

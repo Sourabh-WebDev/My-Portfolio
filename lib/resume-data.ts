@@ -26,8 +26,8 @@ export interface Project {
 
 export interface Certification {
   title: string;
-  issuer: string;
-  date: string;
+  issuer?: string;
+  date?: string;
   credentialId?: string;
   link?: string;
   category: 'certification' | 'achievement' | 'award';
@@ -40,11 +40,11 @@ export interface Skill {
 
 export const resumeData = {
   name: "Sourabh Verma",
-  title: "Front-End Developer",
-  subtitle: "Building responsive, user-focused web applications with React",
+  title: "Full Stack Developer",
+  subtitle: "React.js & Node.js Full Stack AI Developer | JavaScript | TypeScript | Next.js | MongoDB",
   email: "vermaanurag222@gmail.com",
   phone: "+91 8090300447",
-  location: "South City, Lucknow",
+  location: "Lucknow, Uttar Pradesh, India",
   social: {
     linkedin: "https://www.linkedin.com/in/sourabh-vermaweb-dev/",
     github: "https://github.com/Sourabh-WebDev",
@@ -55,37 +55,33 @@ export const resumeData = {
   about: {
     title: "About Me",
     description:
-      "Frontend Developer with four years of experience building responsive, user-focused web applications and seeking a dynamic role where I can contribute to innovative projects, leveraging strong skills in React.js and modern frontend technologies to deliver exceptional user experiences and support team success.",
+      "Full Stack Developer with 5+ years of experience building modern, scalable, and high-performance web applications using React.js, Node.js, JavaScript, TypeScript, Redux, Express.js, and REST APIs. I specialize in developing responsive, user-centric applications from concept to deployment — creating reusable UI components, integrating APIs, optimizing performance, and collaborating with cross-functional teams to deliver reliable software.",
+    details:
+      "I've worked across frontend and backend development on enterprise and client-focused projects, following Git-based workflows, code reviews, and Agile methodologies. I'm passionate about clean, maintainable code and keep learning emerging technologies such as AI-powered applications and cloud-based solutions.",
     highlights: [
-      "4+ years of frontend development experience",
-      "Expert in React.js, Next.js, and TypeScript",
-      "Strong focus on responsive design and user experience",
-      "Proficient in Tailwind CSS, Material UI, Ant Design, and Bootstrap",
+      "5+ years of full-stack development experience",
+      "React.js, Next.js, Node.js, Express.js, and TypeScript",
+      "MBA in Information Technology from Integral University",
+      "Expanding into AI-powered applications and scalable architecture",
     ],
   },
 
   skills: [
     {
-      category: "Frontend Frameworks & Libraries",
-      items: [
-        "React.js",
-        "Next.js",
-        "TypeScript",
-        "Vite.js",
-        "Redux",
-      ],
+      category: "Frontend",
+      items: ["React.js", "Next.js", "JavaScript", "TypeScript", "Redux Toolkit", "React Query", "Context API", "Vite.js"],
     },
     {
       category: "Styling & UI",
-      items: ["Tailwind CSS", "Material UI", "Ant Design", "Kendo React", "Bootstrap"],
+      items: ["HTML5", "CSS3", "Tailwind CSS", "Material UI", "Ant Design", "Kendo React", "Bootstrap"],
     },
     {
-      category: "APIs & State Management",
-      items: ["RESTful APIs", "Axios", "Fetch", "React Query", "Context API"],
+      category: "Backend & APIs",
+      items: ["Node.js", "Express.js", "MongoDB", "RESTful APIs", "Axios", "Fetch"],
     },
     {
-      category: "Backend & Tools",
-      items: ["Node.js", "Git", "Figma / Adobe XD", "Responsive Design"],
+      category: "Tools & Practices",
+      items: ["Git", "Figma / Adobe XD", "Responsive Design", "Agile Development", "Artificial Intelligence (AI)"],
     },
   ] as Skill[],
 
@@ -191,6 +187,7 @@ export const resumeData = {
         "The all-in-one GST billing, inventory, and accounting software built for Bharat. Move from manual registers to a smart system in minutes — covering invoicing, stock management, and real-time financial reporting.",
       technologies: ["React.js", "Node.js", "GST APIs", "Tailwind CSS"],
       link: "https://www.sidhahisab.com/",
+      image: "/projects/sidhahisab.webp",
     },
     {
       title: "CivicVerify",
@@ -233,6 +230,7 @@ export const resumeData = {
         "A comprehensive management system for coaching institutes and libraries — handling student enrollment, batch scheduling, fee collection, book inventory, and issuance tracking.",
       technologies: ["React.js", "Node.js", "MongoDB", "Bootstrap"],
       link: "http://smseducationlko.com/",
+      image: "/projects/sms.webp",
     },
     {
       title: "Hotelio — Hotel Management",
@@ -240,6 +238,7 @@ export const resumeData = {
         "A modern hotel management platform for room booking, front-desk operations, housekeeping tracking, billing, and guest management — streamlining end-to-end hotel workflows.",
       technologies: ["React.js", "Next.js", "Tailwind CSS", "RESTful APIs"],
       link: "https://hoteliorooms.com/",
+      image: "/projects/hotelio.webp",
     },
     {
       title: "Trickle Solutions — Landing Page",
@@ -247,6 +246,7 @@ export const resumeData = {
         "A professional company landing page for Trickle Solutions LLP showcasing services, team, portfolio, and contact information with smooth animations and responsive design.",
       technologies: ["React.js", "Tailwind CSS", "Framer Motion"],
       link: "https://trickle-solutions-website.vercel.app/",
+      image: "/projects/trickle.webp",
     },
     {
       title: "Sociomee",
@@ -259,20 +259,26 @@ export const resumeData = {
 
   education: [
     {
-      degree: "Master of Business Administration",
-      field: "Information Technology & Software's",
-      institution: "Integral University",
+      degree: "Master of Business Administration - MBA",
+      field: "Information Technology",
+      institution: "Integral University, Lucknow",
       year: "2020 - 2022",
     },
     {
       degree: "MERN Technology",
       field: "MERN Stack Development",
-      institution: "Digipodium",
+      institution: "Digipodium, Lucknow",
       year: "2022",
     },
     {
+      degree: "JCHNE + Cloud V2",
+      field: "Information Technology",
+      institution: "Jetking Noida Learning Center",
+      year: "2019 - 2020",
+    },
+    {
       degree: "Bachelor of Commerce",
-      field: "Commerce with Project Management",
+      field: "Accounting and Computer Science",
       institution: "University of Lucknow",
       year: "2015 - 2018",
     },
@@ -280,27 +286,7 @@ export const resumeData = {
 
   certifications: [
     {
-      title: "React – The Complete Guide (incl. Redux)",
-      issuer: "Udemy / Academind",
-      date: "2023",
-      credentialId: "UC-react-complete",
-      link: "https://www.udemy.com/",
-      category: "certification",
-    },
-    {
-      title: "Next.js & React – The Complete Guide",
-      issuer: "Udemy / Academind",
-      date: "2023",
-      credentialId: "UC-nextjs-complete",
-      link: "https://www.udemy.com/",
-      category: "certification",
-    },
-    {
-      title: "TypeScript – The Complete Developer's Guide",
-      issuer: "Udemy / Stephen Grider",
-      date: "2022",
-      credentialId: "UC-typescript-guide",
-      link: "https://www.udemy.com/",
+      title: "AI Foundations",
       category: "certification",
     },
     {
@@ -310,14 +296,20 @@ export const resumeData = {
       category: "certification",
     },
     {
+      title: "JCHNE + Cloud V2",
+      issuer: "Jetking Noida Learning Center",
+      date: "2019 – 2020",
+      category: "certification",
+    },
+    {
       title: "Master of Business Administration – IT",
       issuer: "Integral University, Lucknow",
       date: "2022",
       category: "achievement",
     },
     {
-      title: "4+ Years of Professional Experience",
-      issuer: "Industry Recognition",
+      title: "5+ Years of Professional Experience",
+      issuer: "Full Stack Development",
       date: "2020 – Present",
       category: "achievement",
     },
@@ -328,9 +320,24 @@ export const resumeData = {
       category: "achievement",
     },
     {
-      title: "Responsive Design Excellence",
-      issuer: "Internal Team Recognition – Apexpath OPC",
-      date: "2024",
+      title: "TECH FEST 2019–2020 (IoT & Robotics)",
+      date: "2019 – 2020",
+      category: "award",
+    },
+    {
+      title: "Digital Marketing",
+      category: "award",
+    },
+    {
+      title: "Online COVID-19 Awareness Quiz Programme",
+      category: "award",
+    },
+    {
+      title: "HTML & CSS Basics",
+      category: "award",
+    },
+    {
+      title: "Certificate of Selection",
       category: "award",
     },
   ] as Certification[],

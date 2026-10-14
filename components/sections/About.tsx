@@ -99,10 +99,7 @@ export function AboutSection() {
                 {resumeData.about.description}
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                I&apos;m driven by the challenge of solving complex problems and creating
-                elegant solutions. Whether it&apos;s architecting scalable systems or crafting
-                delightful user interfaces, I bring attention to detail and a passion for
-                excellence.
+                {resumeData.about.details}
               </p>
             </motion.div>
 

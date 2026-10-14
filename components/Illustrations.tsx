@@ -1,5 +1,30 @@
 'use client';
 
+import type { ComponentType } from 'react';
+import { ArrowDownToLine, BrainCircuit, Component, IterationCw, MonitorSmartphone, Share2, Webhook } from 'lucide-react';
+import {
+    SiAntdesign,
+    SiAxios,
+    SiBootstrap,
+    SiCss,
+    SiExpress,
+    SiFigma,
+    SiGit,
+    SiHtml5,
+    SiJavascript,
+    SiMui,
+    SiMongodb,
+    SiNextdotjs,
+    SiNodedotjs,
+    SiReact,
+    SiReactquery,
+    SiRedux,
+    SiTailwindcss,
+    SiTypescript,
+    SiVite,
+} from 'react-icons/si';
+import { Icon3D } from './Icon3D';
+
 /**
  * SVG Illustration components used across the portfolio sections.
  * All illustrations use the site's primary (#50d4ff) and accent (#a78bfa) color palette.
@@ -254,7 +279,7 @@ export function AvatarIllustration() {
             {/* ── Floating stat badge: Years ── */}
             <g filter="url(#av-glow)">
                 <rect x="18" y="155" width="88" height="52" rx="10" fill="#0f172a" stroke="#50d4ff" strokeWidth="1.5" strokeOpacity="0.7" />
-                <text x="62" y="177" fontSize="20" fontWeight="bold" fill="#50d4ff" textAnchor="middle" fontFamily="sans-serif">4+</text>
+                <text x="62" y="177" fontSize="20" fontWeight="bold" fill="#50d4ff" textAnchor="middle" fontFamily="sans-serif">5+</text>
                 <text x="62" y="196" fontSize="9" fill="#94a3b8" textAnchor="middle" fontFamily="sans-serif">Years Exp.</text>
             </g>
 
@@ -397,28 +422,36 @@ export function BrowserMockup({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Tech Icon – circle badge with letter/abbreviation
+   Tech Icon – brand logo on a 3D tile
 ────────────────────────────────────────────────────────────── */
-const techColors: Record<string, { bg: string; text: string; label: string }> = {
-    'React.js': { bg: '#0d2033', text: '#50d4ff', label: 'Re' },
-    'Next.js': { bg: '#111827', text: '#e2e8f0', label: 'N' },
-    TypeScript: { bg: '#0c1a35', text: '#3b82f6', label: 'TS' },
-    'Vite.js': { bg: '#1e0a2e', text: '#a78bfa', label: 'Vi' },
-    Redux: { bg: '#1a0a2e', text: '#8b5cf6', label: 'Rx' },
-    'Tailwind CSS': { bg: '#0a1f2e', text: '#06b6d4', label: 'Tw' },
-    'Material UI': { bg: '#0a1a3a', text: '#2563eb', label: 'MU' },
-    'Ant Design': { bg: '#0a1a3a', text: '#3b82f6', label: 'Ad' },
-    'Kendo React': { bg: '#0a2a1a', text: '#22c55e', label: 'Kr' },
-    Bootstrap: { bg: '#1f0a2e', text: '#7c3aed', label: 'Bs' },
-    'RESTful APIs': { bg: '#1a1a0a', text: '#f59e0b', label: 'Api' },
-    Axios: { bg: '#0a1f1a', text: '#10b981', label: 'Ax' },
-    Fetch: { bg: '#1a0a1a', text: '#f472b6', label: 'Ft' },
-    'React Query': { bg: '#0d2033', text: '#ef4444', label: 'RQ' },
-    'Context API': { bg: '#0d2033', text: '#50d4ff', label: 'Ctx' },
-    'Node.js': { bg: '#0a1f0a', text: '#22c55e', label: 'No' },
-    Git: { bg: '#2a0a0a', text: '#ef4444', label: 'Git' },
-    'Figma / Adobe XD': { bg: '#1a0a1a', text: '#f472b6', label: 'Fg' },
-    'Responsive Design': { bg: '#0a1a2a', text: '#38bdf8', label: 'RD' },
+export const techIcons: Record<string, { icon: ComponentType<{ size?: number | string }>; color: string; glyph?: string }> = {
+    'React.js': { icon: SiReact, color: '#0ea5e9' },
+    'Next.js': { icon: SiNextdotjs, color: '#e2e8f0', glyph: '#0a0a0a' },
+    TypeScript: { icon: SiTypescript, color: '#3178c6' },
+    JavaScript: { icon: SiJavascript, color: '#f7df1e', glyph: '#1a1a1a' },
+    'Vite.js': { icon: SiVite, color: '#8b5cf6' },
+    Redux: { icon: SiRedux, color: '#764abc' },
+    'Redux Toolkit': { icon: SiRedux, color: '#764abc' },
+    HTML5: { icon: SiHtml5, color: '#e34f26' },
+    CSS3: { icon: SiCss, color: '#663399' },
+    'Tailwind CSS': { icon: SiTailwindcss, color: '#06b6d4' },
+    'Material UI': { icon: SiMui, color: '#007fff' },
+    'Ant Design': { icon: SiAntdesign, color: '#1677ff' },
+    'Kendo React': { icon: Component, color: '#ff6358' },
+    Bootstrap: { icon: SiBootstrap, color: '#7952b3' },
+    'RESTful APIs': { icon: Webhook, color: '#f59e0b' },
+    Axios: { icon: SiAxios, color: '#5a29e4' },
+    Fetch: { icon: ArrowDownToLine, color: '#ec4899' },
+    'React Query': { icon: SiReactquery, color: '#ff4154' },
+    'Context API': { icon: Share2, color: '#14b8a6' },
+    'Node.js': { icon: SiNodedotjs, color: '#5fa04e' },
+    'Express.js': { icon: SiExpress, color: '#64748b' },
+    MongoDB: { icon: SiMongodb, color: '#47a248' },
+    Git: { icon: SiGit, color: '#f05032' },
+    'Figma / Adobe XD': { icon: SiFigma, color: '#a259ff' },
+    'Responsive Design': { icon: MonitorSmartphone, color: '#38bdf8' },
+    'Agile Development': { icon: IterationCw, color: '#f97316' },
+    'Artificial Intelligence (AI)': { icon: BrainCircuit, color: '#d946ef' },
 };
 
 interface TechIconProps {
@@ -427,41 +460,17 @@ interface TechIconProps {
 }
 
 export function TechIcon({ skill, size = 48 }: TechIconProps) {
-    const config = techColors[skill] ?? { bg: '#0f172a', text: '#94a3b8', label: skill.slice(0, 2) };
-    const fontSize = config.label.length > 2 ? size * 0.24 : size * 0.28;
+    const config = techIcons[skill];
 
-    return (
-        <svg
-            viewBox={`0 0 ${size} ${size}`}
-            width={size}
-            height={size}
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label={skill}
-        >
-            <rect width={size} height={size} rx={size * 0.22} fill={config.bg} />
-            <rect
-                x="1"
-                y="1"
-                width={size - 2}
-                height={size - 2}
-                rx={size * 0.22 - 1}
-                fill="none"
-                stroke={config.text}
-                strokeWidth="1.2"
-                strokeOpacity="0.4"
-            />
-            <text
-                x={size / 2}
-                y={size / 2 + fontSize * 0.38}
-                fontSize={fontSize}
-                fontWeight="700"
-                fill={config.text}
-                textAnchor="middle"
-                fontFamily="monospace"
-            >
-                {config.label}
-            </text>
-        </svg>
-    );
+    if (!config) {
+        return (
+            <Icon3D color="#475569" size={size} label={skill}>
+                <span className="font-mono font-bold" style={{ fontSize: size * 0.32 }}>
+                    {skill.slice(0, 2)}
+                </span>
+            </Icon3D>
+        );
+    }
+
+    return <Icon3D color={config.color} glyphColor={config.glyph} icon={config.icon} size={size} label={skill} />;
 }

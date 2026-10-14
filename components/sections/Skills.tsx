@@ -87,14 +87,14 @@ export function SkillsSection() {
               <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
                 {skillCategory.category}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {skillCategory.items.map((skill) => (
                   <motion.li
                     key={skill}
-                    className="text-muted-foreground flex items-center gap-2.5"
+                    className="text-muted-foreground flex items-center gap-3"
                     whileHover={{ x: 5 }}
                   >
-                    <TechIcon skill={skill} size={28} />
+                    <TechIcon skill={skill} size={34} />
                     <span className="text-sm">{skill}</span>
                   </motion.li>
                 ))}
